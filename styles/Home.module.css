@@ -87,7 +87,12 @@
   margin-top: 28px;
   flex-wrap: wrap;
 }
-
+.logo {
+  object-fit: contain;
+  background-color: #171717;
+  padding:  0 8px;
+  border-radius: 8px;
+}
 /* Between 700px and 900px */
 @media screen and (min-width: 700px) and (max-width: 900px) {
   .contractBoxGrid {

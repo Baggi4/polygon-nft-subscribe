@@ -51,20 +51,19 @@ export async function getServerSideProps(context) {
   }
 
   // Instantiate our SDK
-  const sdk = ThirdwebSDK.fromPrivateKey(
-    process.env.THIRDWEB_AUTH_PRIVATE_KEY,
-    "mumbai"
-  );
+  const sdk = new ThirdwebSDK("polygon", {
+    clientID: process.env.THIRDWEB_AUTH_CLIENT_ID,
+  });
 
   // Check to see if the user has an NFT
   const hasNft = await checkBalance(sdk, user.address);
 
   // If they don't have an NFT, redirect them to the login page
   if (!hasNft) {
-    console.log("User", user.address, "doesn't have an NFT! Redirecting...");
+    const message = encodeURIComponent("Sorry, you don't have an NFT!");
     return {
       redirect: {
-        destination: "/login",
+        destination: `/login?message=${message}`,
         permanent: false,
       },
     };
